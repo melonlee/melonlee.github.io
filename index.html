@@ -1,13 +1,682 @@
-<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Melon | 人生如此，拿酒来。</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Melon</h1><a id="logo" href="/.">Melon</a><p class="description">人生如此，拿酒来。</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Start</i></a><a href="/archives/"><i class="fa fa-archive"> Archiv</i></a><a href="/about/"><i class="fa fa-user"> Über</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h2 class="post-title"><a href="/2017/01/08/idea创建maven项目速度慢/">idea创建maven项目速度慢</a></h2><div class="post-meta">2017-01-08</div><div class="post-content"><p>下午更新了idea15,之前创建maven项目都是通过mvn的命令行来创建并选择骨架项目:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mvn archetype:generate </div><div class="line">-DgroupId=com.melonlee.oauth2-server </div><div class="line">-DartifactId=oauth2-server </div><div class="line">-DarchetypeArtifactId=maven-archetype-webapp </div><div class="line">-DinteractiveMode=false </div><div class="line">-DarchetypeCatalog=internal</div></pre></td></tr></table></figure></div><p class="readmore"><a href="/2017/01/08/idea创建maven项目速度慢/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2017/01/06/Day5-异常-异常处理、原子性/">Day5-{9.异常}-异常处理、原子性</a></h2><div class="post-meta">2017-01-06</div><div class="post-content"><h3 id="63-在细节消息中包含能捕获失败的信息"><a href="#63-在细节消息中包含能捕获失败的信息" class="headerlink" title="63.在细节消息中包含能捕获失败的信息"></a>63.在细节消息中包含能捕获失败的信息</h3><p>一句话: 在自定义异常时定义出现发生该异常的上下文参数信息以保证查错时能够得到有用信息。</p></div><p class="readmore"><a href="/2017/01/06/Day5-异常-异常处理、原子性/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2017/01/04/Day4-9-异常-Part1/">Day4-{9.异常}-异常的使用场景、异常的种类、如何更好使用异常</a></h2><div class="post-meta">2017-01-04</div><div class="post-content"><h3 id="57-只针对异常的情况才使用异常"><a href="#57-只针对异常的情况才使用异常" class="headerlink" title="57.只针对异常的情况才使用异常"></a>57.只针对异常的情况才使用异常</h3><p>一句话: 在合理的情况下再去使用try-catch，不要试图通过try-catch来控制程序流程，JVM不会优化 try-catch中的代码块。涉及到循环遍历的代码块尽量不要try-catch。</p></div><p class="readmore"><a href="/2017/01/04/Day4-9-异常-Part1/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2017/01/03/Day3-通用程序设计-字符串使用性能、接口引用对象、反射、JNI、优化、命名规范/">Day3-{8.通用程序设计}-字符串使用性能、接口引用对象、反射、JNI、优化、命名规范</a></h2><div class="post-meta">2017-01-03</div><div class="post-content"><h3 id="50、51-字符串的使用场景及性能"><a href="#50、51-字符串的使用场景及性能" class="headerlink" title="50、51.字符串的使用场景及性能"></a>50、51.字符串的使用场景及性能</h3><p>一句话: 只有在适合使用字符串类型的场景时才使用字符串，不要过度依赖使用字符串；字符串的大规模拼接(+)会导致性能问题，建议使用StringBuffer(append)。</p></div><p class="readmore"><a href="/2017/01/03/Day3-通用程序设计-字符串使用性能、接口引用对象、反射、JNI、优化、命名规范/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/12/29/Java使用外部ttf字体文件/">Java使用外部ttf字体文件</a></h2><div class="post-meta">2016-12-29</div><div class="post-content"><blockquote>
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Melon">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Melon"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Melon"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Melon</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about">
+                    About
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+            <h1 id="main-title" class="title">Melon</h1>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2017/01/08/idea创建maven项目速度慢/">
+                idea创建maven项目速度慢
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-01-08</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>下午更新了idea15,之前创建maven项目都是通过mvn的命令行来创建并选择骨架项目:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mvn archetype:generate </div><div class="line">-DgroupId=com.melonlee.oauth2-server </div><div class="line">-DartifactId=oauth2-server </div><div class="line">-DarchetypeArtifactId=maven-archetype-webapp </div><div class="line">-DinteractiveMode=false </div><div class="line">-DarchetypeCatalog=internal</div></pre></td></tr></table></figure>
+<p>试了下用idea创建maven项目并选择一个webapp的项目骨架，发现构建过程非常慢。因为idea构建maven archetype的本质其实也是执行mvn archetype:generate命令，该命令执行时需要指定一个archetype-catalog.xml文件。</p>
+<p>其中DarchetypeCatalog参数用来指定archetype-catalog.xml文件从哪里获取。它的获取方式有remote，internal，local等，默认remote。所以创建过程才会卡住。</p>
+<p>关闭idea所有项目，以使后续设置为默认项目设置并找到maven的runner在VM Options输入框内加入</p>
+<p><code>-DarchetypeCatalog=internal</code> </p>
+<p><img src="http://img.blog.csdn.net/20160815233438359" alt=""></p>
+<p><strong><em><em>注意右上角的灰字：for default project，而不是for current project</em></em></strong></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2017/01/06/Day5-异常-异常处理、原子性/">
+                Day5-{9.异常}-异常处理、原子性
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-01-06</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="63-在细节消息中包含能捕获失败的信息"><a href="#63-在细节消息中包含能捕获失败的信息" class="headerlink" title="63.在细节消息中包含能捕获失败的信息"></a>63.在细节消息中包含能捕获失败的信息</h3><p>一句话: 在自定义异常时定义出现发生该异常的上下文参数信息以保证查错时能够得到有用信息。</p>
+<h3 id="64-努力使失败保持原子性"><a href="#64-努力使失败保持原子性" class="headerlink" title="64.努力使失败保持原子性"></a>64.努力使失败保持原子性</h3><p>一句话: 使对象保持发生异常之前的状态，要保证这点可以在对象调用方法前进行对参数的有效性检查。</p>
+<h3 id="65-不要忽略异常"><a href="#65-不要忽略异常" class="headerlink" title="65.不要忽略异常"></a>65.不要忽略异常</h3><p>一句话: 永远不要在try-catch的catch中留空，哪怕是记录下错误日志。</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2017/01/04/Day4-9-异常-Part1/">
+                Day4-{9.异常}-异常的使用场景、异常的种类、如何更好使用异常
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-01-04</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="57-只针对异常的情况才使用异常"><a href="#57-只针对异常的情况才使用异常" class="headerlink" title="57.只针对异常的情况才使用异常"></a>57.只针对异常的情况才使用异常</h3><p>一句话: 在合理的情况下再去使用try-catch，不要试图通过try-catch来控制程序流程，JVM不会优化 try-catch中的代码块。涉及到循环遍历的代码块尽量不要try-catch。</p>
+<h3 id="58-对可恢复的情况使用受检异常，对编程错误使用运行时异常"><a href="#58-对可恢复的情况使用受检异常，对编程错误使用运行时异常" class="headerlink" title="58.对可恢复的情况使用受检异常，对编程错误使用运行时异常"></a>58.对可恢复的情况使用受检异常，对编程错误使用运行时异常</h3><p>一句话: 三种可抛出结构[checked exception,run-time exception,error],尽量减少受检异常的出现，一般这种异常都可以通过方法对对象本身可能出现异常的状态标识进行检测后给出解决方案来避免。</p>
+<h3 id="59-避免不必要的使用受检的异常"><a href="#59-避免不必要的使用受检的异常" class="headerlink" title="59.避免不必要的使用受检的异常"></a>59.避免不必要的使用受检的异常</h3><p>一句话: 同58条，通过方法返回某方法是否该抛出异常(boolean)，然后把受检异常变成未受检异常(run-time exception)</p>
+<h3 id="60-优先使用标准的异常"><a href="#60-优先使用标准的异常" class="headerlink" title="60.优先使用标准的异常"></a>60.优先使用标准的异常</h3><p>一句话: 接59条，官方已经定义出一些常用RuntimeException,所以如果是非业务异常就尽量使用官方定义的而不是自己再去定义一套异常。（例如:NullPointerException）</p>
+<h3 id="61-抛出与抽象相对应的异常"><a href="#61-抛出与抽象相对应的异常" class="headerlink" title="61.抛出与抽象相对应的异常"></a>61.抛出与抽象相对应的异常</h3><p>一句话: 还没仔细理解</p>
+<h3 id="62-每个方法抛出的异常都要有文档"><a href="#62-每个方法抛出的异常都要有文档" class="headerlink" title="62.每个方法抛出的异常都要有文档"></a>62.每个方法抛出的异常都要有文档</h3><p>一句话: 恩，尽量描述出你定义的异常所触发的条件及具体情况吧。</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2017/01/03/Day3-通用程序设计-字符串使用性能、接口引用对象、反射、JNI、优化、命名规范/">
+                Day3-{8.通用程序设计}-字符串使用性能、接口引用对象、反射、JNI、优化、命名规范
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-01-03</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="50、51-字符串的使用场景及性能"><a href="#50、51-字符串的使用场景及性能" class="headerlink" title="50、51.字符串的使用场景及性能"></a>50、51.字符串的使用场景及性能</h3><p>一句话: 只有在适合使用字符串类型的场景时才使用字符串，不要过度依赖使用字符串；字符串的大规模拼接(+)会导致性能问题，建议使用StringBuffer(append)。</p>
+<h3 id="52-通过接口引用对象"><a href="#52-通过接口引用对象" class="headerlink" title="52.通过接口引用对象"></a>52.通过接口引用对象</h3><p>一句话: 如果有合适的接口类型存在，那么永远优先使用接口来进行声明(参数，返回值，变量，域)而不是具体的实现类。</p>
+<h3 id="53-接口优先于反射机制"><a href="#53-接口优先于反射机制" class="headerlink" title="53.接口优先于反射机制"></a>53.接口优先于反射机制</h3><p>一句话: 反射确实很强大但代价也很大，尽量避免程序在运行时与未知类工作，尽可能使用抽象出来的接口。</p>
+<h3 id="54-谨慎的使用本地方法"><a href="#54-谨慎的使用本地方法" class="headerlink" title="54.谨慎的使用本地方法"></a>54.谨慎的使用本地方法</h3><p>一句话: 由于JNI的平台相关性，尽可能少使用本地代码。</p>
+<h3 id="55-谨慎的进行优化"><a href="#55-谨慎的进行优化" class="headerlink" title="55.谨慎的进行优化"></a>55.谨慎的进行优化</h3><p>一句话: 程序把80%的时间花在20%的代码上，在你没有使用具体的性能工具来确定到底是哪里导致程序的问题时请不要过度优化，写出好的程序而不是快的程序本身就是优化。</p>
+<h3 id="56-命名规范"><a href="#56-命名规范" class="headerlink" title="56.命名规范"></a>56.命名规范</h3><p>一句话: the java language specification 6.8</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/12/29/Java使用外部ttf字体文件/">
+                Java使用外部ttf字体文件
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-12-29</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <blockquote>
 <p>关键字:GraphicsEnvironment</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//create the font </div><div class="line">Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(filepath + &quot;demo.ttf&quot;))</div><div class="line">.deriveFont(250f);</div><div class="line"></div><div class="line">GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();</div><div class="line"></div><div class="line">//register the font</div><div class="line">ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(filepath + &quot;demo.ttf&quot;)));</div></pre></td></tr></table></figure></div><p class="readmore"><a href="/2016/12/29/Java使用外部ttf字体文件/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/12/26/Day2-局部变量、for-each、类库使用、谨慎使用float-double、自动拆装箱/">Day2-{8.通用程序设计}-局部变量、for-each、类库使用、谨慎使用float,double、自动拆装箱</a></h2><div class="post-meta">2016-12-26</div><div class="post-content"><h3 id="45-将局部变量的作用域最小化"><a href="#45-将局部变量的作用域最小化" class="headerlink" title="45.将局部变量的作用域最小化"></a>45.将局部变量的作用域最小化</h3><p>一句话:既然是局部变量就要保证它的一个作用域最小化，一方面是方便阅读，一方面也是防止离开作用域后的意外引用。要保证这一点就是在第一次使用该变量的时候才进行声明，并且声明都应该包含一个初始化表达式(一些try-catch语句例外)。</p></div><p class="readmore"><a href="/2016/12/26/Day2-局部变量、for-each、类库使用、谨慎使用float-double、自动拆装箱/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/12/22/Day1-静态工厂方法、构建器、私有构造器强化单例/">Day1-{2.创建和销毁对象}-静态工厂方法、构建器、私有构造器强化单例</a></h2><div class="post-meta">2016-12-22</div><div class="post-content"><h3 id="1-静态工厂方法"><a href="#1-静态工厂方法" class="headerlink" title="1.静态工厂方法"></a>1.静态工厂方法</h3><p>当一个类需要多种方式来进行初始化的时候，我们需要构建编写多个该类的构造函数，需要定义不同的参数类型，参数个数来满足不同场景下该类的初始化。然而当一些特定业务需求时，参数个数和类型都是一样的，而代表的业务却不同的时候，使用构造函数来初始化类就很难了。</p></div><p class="readmore"><a href="/2016/12/22/Day1-静态工厂方法、构建器、私有构造器强化单例/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/11/01/Mac下php版本降级切换，php7-php5-3/">Mac下php版本降级切换，php7--&gt;php5.3</a></h2><div class="post-meta">2016-11-01</div><div class="post-content"><p>下午同事发来一php项目，使用的是php5.3，但本机安装的是php7 只能进行切换，大概记录下切换的过程，整个过程折腾了一个下午</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//create the font </div><div class="line">Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(filepath + &quot;demo.ttf&quot;))</div><div class="line">.deriveFont(250f);</div><div class="line"></div><div class="line">GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();</div><div class="line"></div><div class="line">//register the font</div><div class="line">ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(filepath + &quot;demo.ttf&quot;)));</div></pre></td></tr></table></figure>
+<p> GraphicsEnvironment它针对默认语言环境进行了本地化,所以可以把外部的字体文件注册到本地中.</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/12/26/Day2-局部变量、for-each、类库使用、谨慎使用float-double、自动拆装箱/">
+                Day2-{8.通用程序设计}-局部变量、for-each、类库使用、谨慎使用float,double、自动拆装箱
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-12-26</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="45-将局部变量的作用域最小化"><a href="#45-将局部变量的作用域最小化" class="headerlink" title="45.将局部变量的作用域最小化"></a>45.将局部变量的作用域最小化</h3><p>一句话:既然是局部变量就要保证它的一个作用域最小化，一方面是方便阅读，一方面也是防止离开作用域后的意外引用。要保证这一点就是在第一次使用该变量的时候才进行声明，并且声明都应该包含一个初始化表达式(一些try-catch语句例外)。</p>
+<h3 id="46-for-each循环优先于传统的for循环"><a href="#46-for-each循环优先于传统的for循环" class="headerlink" title="46.for-each循环优先于传统的for循环"></a>46.for-each循环优先于传统的for循环</h3><p>一句话:如果只是对集合或者数组进行循环解析并不涉及到其中元素的具体操作(转换，删除，状态改变)或者多个集合数组并行遍历，那么推荐使用for-each。因为它对数组索引的边界值只计算一次，所以性能上略有提升。</p>
+<h3 id="47-了解和使用类库"><a href="#47-了解和使用类库" class="headerlink" title="47.了解和使用类库"></a>47.了解和使用类库</h3><p>一句话:不要重复造轮子。</p>
+<h3 id="48-如果需要精确的答案，避免使用float和double"><a href="#48-如果需要精确的答案，避免使用float和double" class="headerlink" title="48.如果需要精确的答案，避免使用float和double"></a>48.如果需要精确的答案，避免使用float和double</h3><p>一句话:float和double不适合货币运算，让一个float和double精确的表示0.1是不可能的，推荐使用BigDecimal，int或者long进行货币计算。</p>
+<ul>
+<li>数值范围&lt;9 使用int</li>
+<li>9&lt;数值范围&lt;18 使用long</li>
+<li>数值范围&gt;18 使用BigDecimal</li>
+</ul>
+<h2 id="49-基本类型优先于装箱基本类型"><a href="#49-基本类型优先于装箱基本类型" class="headerlink" title="49.基本类型优先于装箱基本类型"></a>49.基本类型优先于装箱基本类型</h2><p>一句话: 一般场景下优先使用基本类型。</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/12/22/Day1-静态工厂方法、构建器、私有构造器强化单例/">
+                Day1-{2.创建和销毁对象}-静态工厂方法、构建器、私有构造器强化单例
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-12-22</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="1-静态工厂方法"><a href="#1-静态工厂方法" class="headerlink" title="1.静态工厂方法"></a>1.静态工厂方法</h3><p>当一个类需要多种方式来进行初始化的时候，我们需要构建编写多个该类的构造函数，需要定义不同的参数类型，参数个数来满足不同场景下该类的初始化。然而当一些特定业务需求时，参数个数和类型都是一样的，而代表的业务却不同的时候，使用构造函数来初始化类就很难了。</p>
+<p>静态工厂方法可以为类的构造函数进行命名和进行不同参数类型创建的区分。</p>
+<p>例如一个随机数的创建类:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public RandomIntGenerator(int min) &#123;</div><div class="line"> 	this.min = min;</div><div class="line">  this.max = Integer.MAX_VALUE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>到目前为止，一切正常。但是，我们同样要提供一个构造函数设置一个最大值，然后产生一个介于Integer.MIN_VALUE和最大值的整数。我们添加个构造函数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public RandomIntGenerator(int max) &#123;</div><div class="line">    this.min = Integer.MIN_VALUE;</div><div class="line">    this.max = max;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你这样做了，将会出现编译错误：Duplicate method RandomIntGenerator(int) in type RandomIntGenerator,问题在于构造器没有名字。因此，一个类仅有一个特定方法签名的构造器。同样的，你不能定义方法签名相同的（返回值、名称、参数类型及个数均相同）两个方法。这就是为什么当我们试着添加构造器RandomIntGenerator(int max) 时，会得到上述的编译错误，原因是我们已经有一个构造器 RandomIntGenerator(int min)。</p>
+<p>将静态工厂应用到RandomIntGenerator类，得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class RandomIntGenerator &#123;</div><div class="line">    private final int min;</div><div class="line">    private final int max;</div><div class="line">    private RandomIntGenerator(int min, int max) &#123;</div><div class="line">        this.min = min;</div><div class="line">        this.max = max;</div><div class="line">    &#125;</div><div class="line">    public static RandomIntGenerator biggerThan(int min) &#123;</div><div class="line">        return new RandomIntGenerator(min, Integer.MAX_VALUE);</div><div class="line">    &#125;</div><div class="line">    public static RandomIntGenerator smallerThan(int max) &#123;</div><div class="line">        return new RandomIntGenerator(Integer.MIN_VALUE, max);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-构建器"><a href="#2-构建器" class="headerlink" title="2.构建器"></a>2.构建器</h3><p>主要是解决当初始化类时对类的可选参数的扩展，使用静态工厂和构造函数都不能很好的解决这个问题。往往有时候采用重叠构造器的模式(对多参数时不可控)或者使用Javabeans（现成不安全），但当可选参数条目越来越多的时候，代码的重复的过多并且可用性不强。</p>
+<p>构建器示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">public class NutritionFacts &#123;</div><div class="line">    private final int servingSize;</div><div class="line">    private final int servings;</div><div class="line">    private final int calories;</div><div class="line">    private final int fat;</div><div class="line">    private final int sodium;</div><div class="line">    private final int carbohydrate;</div><div class="line">    </div><div class="line">    public static class Builder &#123;</div><div class="line">        //required parameters</div><div class="line">        private final int servingSize;</div><div class="line">        private final int servings;</div><div class="line">        </div><div class="line">        //Optional parameters - initialized to default values</div><div class="line">        private int calories;</div><div class="line">        private int fat;</div><div class="line">        private int sodium;</div><div class="line">        private int carbohydrate;</div><div class="line">        </div><div class="line">        public Builder(int servingSize, int servings)&#123;</div><div class="line">            this.servingSize = servingSize;</div><div class="line">            this.servings = servings</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        public Builder calories(int val)&#123;</div><div class="line">            calories = val;</div><div class="line">            return this;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        public Builder fat(int val)&#123;</div><div class="line">            fat = val;</div><div class="line">            return this;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        public Builder sodium(int val) &#123;</div><div class="line">            sodium = val;</div><div class="line">            return this;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        public Builder carbohydrate(int val)&#123;</div><div class="line">            carbohydrate = val;</div><div class="line">            return this;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        public NutritionFacts build() &#123;</div><div class="line">            return new NutritionFacts(this);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    private NutritionFacts(Builder builder)&#123;</div><div class="line">        servingSize = builder.servingSize;</div><div class="line">        servings = builder.servings;</div><div class="line">        calories = builder.calories;</div><div class="line">        fat = builder.fat;</div><div class="line">        sodium = builder.sodium;</div><div class="line">        carbohydrate = builder.carbohydrate;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">NutritionFacts juice = new NutritionFacts.Builder(240, 8).</div><div class="line">    calories(100).sodium(35).carbohydrate(27).build();</div></pre></td></tr></table></figure></p>
+<h3 id="3-私有构造器强化单例"><a href="#3-私有构造器强化单例" class="headerlink" title="3.私有构造器强化单例"></a>3.私有构造器强化单例</h3><p>目前三中方式:</p>
+<h4 id="3-1-把构造器私有化，内部实例化一份实例对外暴露"><a href="#3-1-把构造器私有化，内部实例化一份实例对外暴露" class="headerlink" title="3.1 把构造器私有化，内部实例化一份实例对外暴露"></a>3.1 把构造器私有化，内部实例化一份实例对外暴露</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class Melon &#123;</div><div class="line">	public static final Melon INSTANCE = new Melon();</div><div class="line">   private Melon()&#123;&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="3-2-构造器私有化，将内部成员示例变成静态工厂方法"><a href="#3-2-构造器私有化，将内部成员示例变成静态工厂方法" class="headerlink" title="3.2 构造器私有化，将内部成员示例变成静态工厂方法"></a>3.2 构造器私有化，将内部成员示例变成静态工厂方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Melon&#123;</div><div class="line">	private static final Melon INSTANCE = new Melon();</div><div class="line">	</div><div class="line">	private Melon()&#123;&#125;</div><div class="line">	</div><div class="line">	public static Melon getInstance()&#123;</div><div class="line">		return INSTANCE;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="3-3-编写一个包含单个元素的枚举类型，可自动进行序列化机制。（推荐）"><a href="#3-3-编写一个包含单个元素的枚举类型，可自动进行序列化机制。（推荐）" class="headerlink" title="3.3 编写一个包含单个元素的枚举类型，可自动进行序列化机制。（推荐）"></a>3.3 编写一个包含单个元素的枚举类型，可自动进行序列化机制。（推荐）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public enum Melon&#123;</div><div class="line">	INSTANCE;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/01/Mac下php版本降级切换，php7-php5-3/">
+                Mac下php版本降级切换，php7-->php5.3
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-01</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>下午同事发来一php项目，使用的是php5.3，但本机安装的是php7 只能进行切换，大概记录下切换的过程，整个过程折腾了一个下午</p>
 <p>1.使用brew</p>
 <p>2.安装xcode-tools xcode-install –install</p>
-<p>3.brew update</p></div><p class="readmore"><a href="/2016/11/01/Mac下php版本降级切换，php7-php5-3/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/07/12/Maven-fails-to-parse-POMs-at-jenkins/">Maven fails to parse POMs at jenkins</a></h2><div class="post-meta">2016-07-12</div><div class="post-content"><p>在进行构建时出现以下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">Started by user anonymous</div><div class="line">Building in workspace /Users/Melon/.jenkins/jobs/first/workspace</div><div class="line"> &gt; git rev-parse --is-inside-work-tree # timeout=10</div><div class="line">Fetching changes from the remote Git repository</div><div class="line"> &gt; git config remote.origin.url https://git.coding.net/melongit/jdbcCoreframework.git # timeout=10</div><div class="line">Fetching upstream changes from https://git.coding.net/melongit/jdbcCoreframework.git</div><div class="line"> &gt; git --version # timeout=10</div><div class="line">using .gitcredentials to set credentials</div><div class="line"> &gt; git config --local credential.username melongit # timeout=10</div><div class="line"> &gt; git config --local credential.helper store --file=/Users/Melon/Documents/Tomcat7/temp/git2101628945155958281.credentials # timeout=10</div><div class="line"> &gt; git -c core.askpass=true fetch --tags --progress https://git.coding.net/melongit/jdbcCoreframework.git +refs/heads/*:refs/remotes/origin/*</div><div class="line"> &gt; git config --local --remove-section credential # timeout=10</div><div class="line"> &gt; git rev-parse refs/remotes/origin/master^&#123;commit&#125; # timeout=10</div><div class="line"> &gt; git rev-parse refs/remotes/origin/origin/master^&#123;commit&#125; # timeout=10</div><div class="line">Checking out Revision 0bd218173e74065806712e4dd656c911fc1e26bf (refs/remotes/origin/master)</div><div class="line"> &gt; git config core.sparsecheckout # timeout=10</div><div class="line"> &gt; git checkout -f 0bd218173e74065806712e4dd656c911fc1e26bf</div><div class="line"> &gt; git rev-list 0bd218173e74065806712e4dd656c911fc1e26bf # timeout=10</div><div class="line">Parsing POMs</div><div class="line">ERROR: Failed to parse POMs</div><div class="line">hudson.maven.MavenEmbedderException: 1 problem was encountered while building the effective settings</div><div class="line">[FATAL] Non-readable settings /Users/Melon/.m2: /Users/Melon/.m2 (Is a directory) @ /Users/Melon/.m2</div><div class="line"></div><div class="line">    at hudson.maven.MavenEmbedder.&lt;init&gt;(MavenEmbedder.java:128)</div><div class="line">    at hudson.maven.MavenEmbedder.&lt;init&gt;(MavenEmbedder.java:109)</div><div class="line">    at hudson.maven.MavenEmbedder.&lt;init&gt;(MavenEmbedder.java:136)</div><div class="line">    at hudson.maven.MavenUtil.createEmbedder(MavenUtil.java:212)</div><div class="line">    at hudson.maven.MavenModuleSetBuild$PomParser.invoke(MavenModuleSetBuild.java:1285)</div><div class="line">    at hudson.maven.MavenModuleSetBuild$PomParser.invoke(MavenModuleSetBuild.java:1088)</div><div class="line">    at hudson.FilePath.act(FilePath.java:991)</div><div class="line">    at hudson.FilePath.act(FilePath.java:969)</div><div class="line">    at hudson.maven.MavenModuleSetBuild$MavenModuleSetBuildExecution.parsePoms(MavenModuleSetBuild.java:950)</div><div class="line">    at hudson.maven.MavenModuleSetBuild$MavenModuleSetBuildExecution.doRun(MavenModuleSetBuild.java:677)</div><div class="line">    at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:537)</div><div class="line">    at hudson.model.Run.execute(Run.java:1741)</div><div class="line">    at hudson.maven.MavenModuleSetBuild.run(MavenModuleSetBuild.java:529)</div><div class="line">    at hudson.model.ResourceController.execute(ResourceController.java:98)</div><div class="line">    at hudson.model.Executor.run(Executor.java:410)</div><div class="line">Caused by: hudson.maven.MavenEmbedderException: 1 problem was encountered while building the effective settings</div><div class="line">[FATAL] Non-readable settings /Users/Melon/.m2: /Users/Melon/.m2 (Is a directory) @ /Users/Melon/.m2</div><div class="line"></div><div class="line">    at hudson.maven.MavenEmbedder.getSettings(MavenEmbedder.java:261)</div><div class="line">    at hudson.maven.MavenEmbedder.buildMavenExecutionRequest(MavenEmbedder.java:157)</div><div class="line">    at hudson.maven.MavenEmbedder.&lt;init&gt;(MavenEmbedder.java:120)</div><div class="line">    ... 14 more</div><div class="line">Caused by: org.apache.maven.settings.building.SettingsBuildingException: 1 problem was encountered while building the effective settings</div><div class="line">[FATAL] Non-readable settings /Users/Melon/.m2: /Users/Melon/.m2 (Is a directory) @ /Users/Melon/.m2</div><div class="line"></div><div class="line">    at org.apache.maven.settings.building.DefaultSettingsBuilder.build(DefaultSettingsBuilder.java:116)</div><div class="line">    at hudson.maven.MavenEmbedder.getSettings(MavenEmbedder.java:259)</div><div class="line">    ... 16 more</div><div class="line">Finished: FAILURE</div></pre></td></tr></table></figure></div><p class="readmore"><a href="/2016/07/12/Maven-fails-to-parse-POMs-at-jenkins/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/06/24/Hibernate-Validator/">Hibernate Validator</a></h2><div class="post-meta">2016-06-24</div><div class="post-content"><blockquote>
+<p>3.brew update</p>
+<p>4.brew tap homebrew/dupes</p>
+<p>5.brew tap homebrew/versions</p>
+<p>6.brew tap homebrew/homebrew-php</p>
+<p>7.安装对应版本，如果是安装php5.3</p>
+<p>brew install homebrew/php/php53 –with-fpm –with-apache</p>
+<p>否则会出现不生成libphp5.so文件</p>
+<p>8.在apache的配置文件中加载指定版本的php静态库 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ln -sfv /usr/local/opt/php53/*.plist ~/Library/LaunchAgents</div><div class="line"></div><div class="line">launchctl load ~/Library/LaunchAgents/homebrew.mxcl.php53.plist</div></pre></td></tr></table></figure>
+<p>9.修改apache中httpd.conf文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LoadModule php5_module /usr/local/opt/php53/libexec/apache2/libphp5.so</div></pre></td></tr></table></figure>
+<p>10.<code>sudo apachectl restart</code></p>
+<p>–EOF–</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/07/12/Maven-fails-to-parse-POMs-at-jenkins/">
+                Maven fails to parse POMs at jenkins
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-07-12</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>在进行构建时出现以下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">Started by user anonymous</div><div class="line">Building in workspace /Users/Melon/.jenkins/jobs/first/workspace</div><div class="line"> &gt; git rev-parse --is-inside-work-tree # timeout=10</div><div class="line">Fetching changes from the remote Git repository</div><div class="line"> &gt; git config remote.origin.url https://git.coding.net/melongit/jdbcCoreframework.git # timeout=10</div><div class="line">Fetching upstream changes from https://git.coding.net/melongit/jdbcCoreframework.git</div><div class="line"> &gt; git --version # timeout=10</div><div class="line">using .gitcredentials to set credentials</div><div class="line"> &gt; git config --local credential.username melongit # timeout=10</div><div class="line"> &gt; git config --local credential.helper store --file=/Users/Melon/Documents/Tomcat7/temp/git2101628945155958281.credentials # timeout=10</div><div class="line"> &gt; git -c core.askpass=true fetch --tags --progress https://git.coding.net/melongit/jdbcCoreframework.git +refs/heads/*:refs/remotes/origin/*</div><div class="line"> &gt; git config --local --remove-section credential # timeout=10</div><div class="line"> &gt; git rev-parse refs/remotes/origin/master^&#123;commit&#125; # timeout=10</div><div class="line"> &gt; git rev-parse refs/remotes/origin/origin/master^&#123;commit&#125; # timeout=10</div><div class="line">Checking out Revision 0bd218173e74065806712e4dd656c911fc1e26bf (refs/remotes/origin/master)</div><div class="line"> &gt; git config core.sparsecheckout # timeout=10</div><div class="line"> &gt; git checkout -f 0bd218173e74065806712e4dd656c911fc1e26bf</div><div class="line"> &gt; git rev-list 0bd218173e74065806712e4dd656c911fc1e26bf # timeout=10</div><div class="line">Parsing POMs</div><div class="line">ERROR: Failed to parse POMs</div><div class="line">hudson.maven.MavenEmbedderException: 1 problem was encountered while building the effective settings</div><div class="line">[FATAL] Non-readable settings /Users/Melon/.m2: /Users/Melon/.m2 (Is a directory) @ /Users/Melon/.m2</div><div class="line"></div><div class="line">    at hudson.maven.MavenEmbedder.&lt;init&gt;(MavenEmbedder.java:128)</div><div class="line">    at hudson.maven.MavenEmbedder.&lt;init&gt;(MavenEmbedder.java:109)</div><div class="line">    at hudson.maven.MavenEmbedder.&lt;init&gt;(MavenEmbedder.java:136)</div><div class="line">    at hudson.maven.MavenUtil.createEmbedder(MavenUtil.java:212)</div><div class="line">    at hudson.maven.MavenModuleSetBuild$PomParser.invoke(MavenModuleSetBuild.java:1285)</div><div class="line">    at hudson.maven.MavenModuleSetBuild$PomParser.invoke(MavenModuleSetBuild.java:1088)</div><div class="line">    at hudson.FilePath.act(FilePath.java:991)</div><div class="line">    at hudson.FilePath.act(FilePath.java:969)</div><div class="line">    at hudson.maven.MavenModuleSetBuild$MavenModuleSetBuildExecution.parsePoms(MavenModuleSetBuild.java:950)</div><div class="line">    at hudson.maven.MavenModuleSetBuild$MavenModuleSetBuildExecution.doRun(MavenModuleSetBuild.java:677)</div><div class="line">    at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:537)</div><div class="line">    at hudson.model.Run.execute(Run.java:1741)</div><div class="line">    at hudson.maven.MavenModuleSetBuild.run(MavenModuleSetBuild.java:529)</div><div class="line">    at hudson.model.ResourceController.execute(ResourceController.java:98)</div><div class="line">    at hudson.model.Executor.run(Executor.java:410)</div><div class="line">Caused by: hudson.maven.MavenEmbedderException: 1 problem was encountered while building the effective settings</div><div class="line">[FATAL] Non-readable settings /Users/Melon/.m2: /Users/Melon/.m2 (Is a directory) @ /Users/Melon/.m2</div><div class="line"></div><div class="line">    at hudson.maven.MavenEmbedder.getSettings(MavenEmbedder.java:261)</div><div class="line">    at hudson.maven.MavenEmbedder.buildMavenExecutionRequest(MavenEmbedder.java:157)</div><div class="line">    at hudson.maven.MavenEmbedder.&lt;init&gt;(MavenEmbedder.java:120)</div><div class="line">    ... 14 more</div><div class="line">Caused by: org.apache.maven.settings.building.SettingsBuildingException: 1 problem was encountered while building the effective settings</div><div class="line">[FATAL] Non-readable settings /Users/Melon/.m2: /Users/Melon/.m2 (Is a directory) @ /Users/Melon/.m2</div><div class="line"></div><div class="line">    at org.apache.maven.settings.building.DefaultSettingsBuilder.build(DefaultSettingsBuilder.java:116)</div><div class="line">    at hudson.maven.MavenEmbedder.getSettings(MavenEmbedder.java:259)</div><div class="line">    ... 16 more</div><div class="line">Finished: FAILURE</div></pre></td></tr></table></figure>
+<p>解决方案就是把 系统设置中关于Maven的高级选项-关于<code>Settings in file system</code>的都选择为 <code>&quot;Use default maven setting&quot;</code></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/06/24/Hibernate-Validator/">
+                Hibernate Validator
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-06-24</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <blockquote>
 <p>Hibernate Validator是JSR-303的一个实现。在FormBean里添加Hibernate Validator的注解，与定义一个校验类的做法相比。注解更加简洁、灵活。</p>
 </blockquote>
 <p>注解说明</p>
-<p>Bean Validation 中内置的 constraint   </p></div><p class="readmore"><a href="/2016/06/24/Hibernate-Validator/">Mehr lesen</a></p></div><nav class="page-navigator"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Nächster</a></nav></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://www.melonlee.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Kategorien</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Server/" style="font-size: 15px;">Server</a> <a href="/tags/重读Effective-Java2/" style="font-size: 15px;">重读Effective Java2</a> <a href="/tags/生活/" style="font-size: 15px;">生活</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Letzte</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/08/idea创建maven项目速度慢/">idea创建maven项目速度慢</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/06/Day5-异常-异常处理、原子性/">Day5-{9.异常}-异常处理、原子性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/04/Day4-9-异常-Part1/">Day4-{9.异常}-异常的使用场景、异常的种类、如何更好使用异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/03/Day3-通用程序设计-字符串使用性能、接口引用对象、反射、JNI、优化、命名规范/">Day3-{8.通用程序设计}-字符串使用性能、接口引用对象、反射、JNI、优化、命名规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/29/Java使用外部ttf字体文件/">Java使用外部ttf字体文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/26/Day2-局部变量、for-each、类库使用、谨慎使用float-double、自动拆装箱/">Day2-{8.通用程序设计}-局部变量、for-each、类库使用、谨慎使用float,double、自动拆装箱</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/22/Day1-静态工厂方法、构建器、私有构造器强化单例/">Day1-{2.创建和销毁对象}-静态工厂方法、构建器、私有构造器强化单例</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/01/Mac下php版本降级切换，php7-php5-3/">Mac下php版本降级切换，php7-->php5.3</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/Maven-fails-to-parse-POMs-at-jenkins/">Maven fails to parse POMs at jenkins</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/24/Hibernate-Validator/">Hibernate Validator</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">Melon.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+<p>Bean Validation 中内置的 constraint   </p>
+<ol>
+<li>@Null   被注释的元素必须为 null   </li>
+<li>@NotNull    被注释的元素必须不为 null   </li>
+<li>@AssertTrue     被注释的元素必须为 true   </li>
+<li>@AssertFalse    被注释的元素必须为 false   </li>
+<li>@Min(value)     被注释的元素必须是一个数字，其值必须大于等于指定的最小值   </li>
+<li>@Max(value)     被注释的元素必须是一个数字，其值必须小于等于指定的最大值   </li>
+<li>@DecimalMin(value)  被注释的元素必须是一个数字，其值必须大于等于指定的最小值   </li>
+<li>@DecimalMax(value)  被注释的元素必须是一个数字，其值必须小于等于指定的最大值   </li>
+<li>@Size(max=, min=)   被注释的元素的大小必须在指定的范围内   </li>
+<li>@Digits (integer, fraction)     被注释的元素必须是一个数字，其值必须在可接受的范围内   </li>
+<li>@Past   被注释的元素必须是一个过去的日期   </li>
+<li>@Future     被注释的元素必须是一个将来的日期   </li>
+<li>@Pattern(regex=,flag=)  被注释的元素必须符合指定的正则表达式   </li>
+</ol>
+<p>Hibernate Validator 附加的 constraint   </p>
+<ol>
+<li>@NotBlank(message =)   验证字符串非null，且长度必须大于0   </li>
+<li>@Email  被注释的元素必须是电子邮箱地址   </li>
+<li>@Length(min=,max=)  被注释的字符串的大小必须在指定的范围内   </li>
+<li>@NotEmpty   被注释的字符串的必须非空   </li>
+<li>@Range(min=,max=,message=)  被注释的元素必须在合适的范围内 </li>
+</ol>
+<p>在Pom中加入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;4.3.1.Final&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<p>在spring-controller中使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@ResponseBody</div><div class="line"> @RequestMapping(value = &quot;/validate&quot;, method = &#123; RequestMethod.POST,</div><div class="line">         RequestMethod.GET &#125;)</div><div class="line"> public String validate(@Valid Hello hello, BindingResult result) &#123;</div><div class="line"></div><div class="line">     if (result.hasErrors()) &#123;</div><div class="line">         return &quot;error&quot;;</div><div class="line">     &#125;</div><div class="line">     return &quot;ok&quot;;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>Done!</p>
+
+        </div>
+    
+
+</div>
+            
+        </section>
+    </div>
+</div>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrap-pagination">
+                <a class="disabled" href="/">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </a>
+                <a class="" href="/page/2/">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2017/01/08/idea创建maven项目速度慢/">idea创建maven项目速度慢</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/01/06/Day5-异常-异常处理、原子性/">Day5-{9.异常}-异常处理、原子性</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/01/04/Day4-9-异常-Part1/">Day4-{9.异常}-异常的使用场景、异常的种类</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/01/03/Day3-通用程序设计-字符串使用性能、接口引用对象、反射、JNI、优化、命名规范/">Day3-{8.通用程序设计}-字符串使用性能、接</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
